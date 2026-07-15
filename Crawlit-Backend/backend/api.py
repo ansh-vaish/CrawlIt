@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from os import environ
 from uuid import uuid4
 from pathlib import Path
 
@@ -16,7 +17,7 @@ from backend.workers import WorkerManager
 
 
 origins = [
-    "http://localhost:3000",
+    environ.get("FRONTEND_URL", "http://localhost:3000")
 ]
 
 

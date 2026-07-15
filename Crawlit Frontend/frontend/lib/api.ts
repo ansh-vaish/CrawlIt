@@ -29,25 +29,6 @@ function buildUrl(path: string, params: Record<string, string>) {
   return url.toString();
 }
 
-export async function processRepo(repoOwner: string, repoName: string) {
-  const res = await fetch(`${BASE_URL}/process`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      repoOwner,
-      repoName,
-    }),
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to process repository");
-  }
-
-  return res.json();
-}
-
 export async function getRepository(repoOwner: string, repoName: string) {
   const res = await fetch(`${BASE_URL}/repositories/${repoOwner}/${repoName}`, {
     cache: "no-store",

@@ -1,5 +1,6 @@
 import asyncio
 import os
+from pathlib import Path
 from typing import List
 from dotenv import load_dotenv
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -87,8 +88,8 @@ async def ingestion_pipeline(owner: str, repo: str, progress_callback=None, canc
         chunk_size=4000,
         chunk_overlap=200,
     )
-    file_path = os.path.join(os.getcwd(), f"backend\\generated_docs\\{owner}_{repo}.md")
-    loader = TextLoader(file_path, encoding="utf-8")
+    file_path = Path.cwd() / "backend" / "generated_docs" / f"{owner}_{repo}.md"
+    loader = TextLoader(str(file_path), encoding="utf-8")
     docs = loader.load()
     splitted_docs = text_splitter.split_documents(docs)
 
