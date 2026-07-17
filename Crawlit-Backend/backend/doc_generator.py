@@ -11,7 +11,6 @@ from langchain_core.messages import HumanMessage
 from langchain_text_splitters import Language, RecursiveCharacterTextSplitter
 
 from langchain_openai import ChatOpenAI
-from langchain_ollama import ChatOllama
 from backend.db.jobs import JobCancelledError
 
 load_dotenv()

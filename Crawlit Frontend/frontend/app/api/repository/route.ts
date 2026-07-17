@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { saveRepo } from "@/lib/repository";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
+const BASE_URL = process.env.BACKEND_URL!;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

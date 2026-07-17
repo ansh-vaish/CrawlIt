@@ -1,4 +1,8 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
+function getBaseUrl() {
+  return typeof window === "undefined"
+    ? process.env.BACKEND_URL!
+    : process.env.NEXT_PUBLIC_BACKEND_URL!;
+}
 
 export type RepositoryState = {
   owner: string;
@@ -20,7 +24,7 @@ export type JobState = {
 };
 
 function buildUrl(path: string, params: Record<string, string>) {
-  const url = new URL(path, BASE_URL);
+  const url = new URL(path, getBaseUrl());
 
   for (const [key, value] of Object.entries(params)) {
     url.searchParams.set(key, value);
@@ -30,7 +34,7 @@ function buildUrl(path: string, params: Record<string, string>) {
 }
 
 export async function getRepository(repoOwner: string, repoName: string) {
-  const res = await fetch(`${BASE_URL}/repositories/${repoOwner}/${repoName}`, {
+  const res = await fetch(`${getBaseUrl()}/repositories/${repoOwner}/${repoName}`, {
     cache: "no-store",
   });
 
@@ -42,7 +46,7 @@ export async function getRepository(repoOwner: string, repoName: string) {
 }
 
 export async function getJob(jobId: string) {
-  const res = await fetch(`${BASE_URL}/jobs/${jobId}`, {
+  const res = await fetch(`${getBaseUrl()}/jobs/${jobId}`, {
     cache: "no-store",
   });
 
@@ -54,7 +58,7 @@ export async function getJob(jobId: string) {
 }
 
 export async function startIndexing(repoOwner: string, repoName: string) {
-  const res = await fetch(`${BASE_URL}/index`, {
+  const res = await fetch(`${getBaseUrl()}/index`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
