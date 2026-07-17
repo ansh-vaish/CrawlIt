@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { saveRepo } from "@/lib/repository";
 
-const BASE_URL = process.env.BACKEND_URL!;
+import { getBaseUrl } from "@/lib/config";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
   }
 
-  const response = await fetch(`${BASE_URL}/repositories/${owner}/${repo}`, {
+  const response = await fetch(`${getBaseUrl()}/repositories/${owner}/${repo}`, {
     cache: "no-store",
   });
 

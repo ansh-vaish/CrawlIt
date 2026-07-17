@@ -1,9 +1,4 @@
-function getBaseUrl() {
-  return typeof window === "undefined"
-    ? process.env.BACKEND_URL!
-    : process.env.NEXT_PUBLIC_BACKEND_URL!;
-}
-
+import { getBaseUrl } from "@/lib/config";
 export type RepositoryState = {
   owner: string;
   repo: string;
@@ -34,9 +29,12 @@ function buildUrl(path: string, params: Record<string, string>) {
 }
 
 export async function getRepository(repoOwner: string, repoName: string) {
-  const res = await fetch(`${getBaseUrl()}/repositories/${repoOwner}/${repoName}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${getBaseUrl()}/repositories/${repoOwner}/${repoName}`,
+    {
+      cache: "no-store",
+    },
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch repository state");
