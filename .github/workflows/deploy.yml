@@ -26,10 +26,10 @@ jobs:
 
             echo "Installing backend"
             cd Crawlit-Backend
-            uv sync
+            /home/ansh/.local/bin/uv sync
 
             echo "Installing frontend"
-            cd ../Crawlit-Frontend
+            cd ../"Crawlit Frontend"
             npm install
             echo "Building frontend"
             npm run build
