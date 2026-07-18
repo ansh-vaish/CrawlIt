@@ -138,10 +138,8 @@ async def cancel_job(job_id: str):
     job = await repository.get_job(job_id)
     if job is None:
         raise HTTPException(status_code=404, detail="Job not found")
-    if job.status == JobStatus.QUEUED or job.status == JobStatus.FAILED:
-        job = await repository.cancel_job(job_id)
-        return serialize_job(job)
-    raise HTTPException(status_code=400, detail="Job cannot be cancelled")
+    job = await repository.cancel_job(job_id)
+    return serialize_job(job)
 
 @app.get("/answer")
 async def answer(req : QueryRequest = Depends()):

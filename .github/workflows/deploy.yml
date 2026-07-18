@@ -1,0 +1,41 @@
+name: Deploy Crawlit
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.2.0
+
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+
+          script: |
+            cd /opt/crawlit
+
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Installing backend"
+            cd Crawlit-Backend
+            uv sync
+
+            echo "Installing frontend"
+            cd ../Crawlit-Frontend
+            npm install
+            echo "Building frontend"
+            npm run build
+
+            echo "Restarting"
+            pm2 restart crawlit-frontend
+            sudo systemctl restart crawlit-backend
+
+            pm2 save

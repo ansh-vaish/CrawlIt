@@ -125,7 +125,7 @@ export default function HomePage() {
         </p>
 
         {/* Card */}
-        <form onSubmit={handleSubmit} className="mt-8 w-full max-w-4xl">
+        <form onSubmit={handleSubmit} className="mt-8 w-full max-w-5xl">
           <div className="relative">
             {/* shadow */}
             <div className="absolute left-3 top-3 h-full w-full rounded-lg border-2 border-[#2B2118] bg-[#5B4636]" />
@@ -175,10 +175,11 @@ export default function HomePage() {
 
                 <div className="flex flex-wrap gap-3">
                   {[
-                    "facebook/react",
                     "vercel/next.js",
-                    "microsoft/vscode",
-                    "langchain-ai/langchain",
+                    "fastapi/fastapi",
+                    "langchain-ai/langgraph",
+                    "expressjs/express",
+                    "axios/axios",
                   ].map((repo) => (
                     <button
                       key={repo}

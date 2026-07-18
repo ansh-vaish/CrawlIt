@@ -19,11 +19,13 @@ export type JobState = {
 };
 
 function buildUrl(path: string, params: Record<string, string>) {
-  const url = new URL(path, getBaseUrl());
+  const base = getBaseUrl();
 
-  for (const [key, value] of Object.entries(params)) {
-    url.searchParams.set(key, value);
-  }
+  const url = base.startsWith("http")
+    ? new URL(path, base)
+    : new URL(`${base}${path}`, window.location.origin);
+
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
 
   return url.toString();
 }
@@ -79,7 +81,9 @@ export async function askQuestion(
   repoName: string,
   query: string,
 ) {
-  const res = await fetch(buildUrl("/answer", { repoOwner, repoName, query }));
+  const res = await fetch(
+    buildUrl("/answer", { repoOwner, repoName, query }),
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch repository answer");
