@@ -110,7 +110,9 @@ SKIP_DIRS = {
     "fixtures", "__tests__", "__mocks__", "__snapshots__", "test-utils",
     "scripts", "flow-typed", ".circleci", "benchmarks", "e2e",
     "cypress", "playwright-report", "public", "static", "assets",
-    "locales", "i18n", "www", "logs", "tmp", "temp",".agents" , ".claude", ".llm", ".openai", ".do", ".anthropic", ".cohere", ".replicate", ".vllm",".cursor" , "exmaple", "examples", "sample", "samples", "demo", "demos", "testdata","i18n", "localization", "translations", "translation", "lang", "langs", "language", "languages", "packages" , "package" , 
+    "locales", "i18n", "www", "logs", "tmp", "temp", "exmaple", "examples", "sample", "samples", "demo", "demos", "testdata","i18n", "localization", "translations", "translation", "lang", "langs", "language", "languages", "packages" , "package" , "asset" , "resources" , "resource" , "public" , "static" , "dist" , "build" , "out" , "bin" , "lib" , "libs" , "vendor" , "vendors" , "third_party" , "third-party" , "thirdparty" , "external", ".cache", ".tmp", ".temp", ".log", ".logs", ".bak", ".backup", ".backups", ".old", ".archive", ".archives", ".trash", ".recycle", ".recycled", ".deleted", ".removed", ".obsolete", ".deprecated","bin","config"
+    # agent/AI pipelines
+    ".agents" , ".claude", ".llm", ".openai", ".do", ".anthropic", ".cohere", ".replicate", ".vllm",".cursor" ,".codex"
 }
 
 SKIP_FILES = {

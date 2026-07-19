@@ -175,11 +175,12 @@ export default function HomePage() {
 
                 <div className="flex flex-wrap gap-3">
                   {[
-                    "vercel/next.js",
                     "fastapi/fastapi",
                     "langchain-ai/langgraph",
                     "expressjs/express",
+                    "pydantic/pydantic",
                     "axios/axios",
+                    "pmndrs/zustand",
                   ].map((repo) => (
                     <button
                       key={repo}

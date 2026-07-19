@@ -29,9 +29,7 @@ export default function RepositoryIndexingStatus({
       try {
         const job = await getJob(jobId);
 
-        if (cancelled) {
-          return;
-        }
+        if (cancelled) return;
 
         setProgress(job.progress ?? 0);
         setMessage(
@@ -71,24 +69,67 @@ export default function RepositoryIndexingStatus({
   }, [jobId, repoName, repoOwner, router]);
 
   return (
-    <div
-      className="flex items-center justify-center rounded-3xl border border-stone-200 bg-white p-8 shadow-sm min-h-128"
-    >
-      <div className="max-w-md text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.25em] text-stone-500">
-          Indexing
+    <div className="mx-auto flex min-h-168 max-w-2xl items-center justify-center">
+      <div className="w-full rounded-3xl border-[3px] border-[#2B2118] bg-[#F6F0E8] p-8 shadow-[10px_10px_0px_#8B5E3C]">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#8B5E3C]">
+          Indexing Repository
         </p>
-        <h2 className="mt-3 text-2xl font-semibold text-stone-900">
+
+        <h2 className="mt-3 text-4xl font-black text-[#2B2118]">
           {repoOwner}/{repoName}
         </h2>
-        <p className="mt-3 text-sm text-stone-600">{message}</p>
-        <div className="mt-6 h-2 overflow-hidden rounded-full bg-stone-100">
-          <div
-            className="h-full rounded-full bg-stone-900 transition-all"
-            style={{ width: `${Math.max(5, Math.min(progress, 100))}%` }}
-          />
+
+        <div className="mt-8 text-center">
+          <p className="text-xl leading-8 text-[#5B4636]">
+            {message}
+            <span> </span>
+            <span className="inline-flex">
+              <span className="animate-bounce [animation-delay:0ms]">.</span>
+              <span className="animate-bounce [animation-delay:200ms]">.</span>
+              <span className="animate-bounce [animation-delay:400ms]">.</span>
+            </span>
+          </p>
         </div>
-        <p className="mt-2 text-xs text-stone-500">{progress}% complete</p>
+
+        <div className="mt-10">
+          <div className="mb-2 flex items-center justify-between text-sm font-medium text-[#5B4636]">
+            <span>Progress</span>
+            <span>{progress}%</span>
+          </div>
+
+          <div className="h-3 overflow-hidden rounded-full border-2 border-[#2B2118] bg-[#EADFCF]">
+            <div
+              className="relative h-full bg-[#8B5E3C] transition-all duration-700"
+              style={{
+                width: `${Math.max(5, Math.min(progress, 100))}%`,
+              }}
+            >
+              <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-linear-to-r from-transparent via-white/30 to-transparent" />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-2xl border-2 border-[#2B2118] bg-[#FBF7F1] p-6">
+          <p className="text-base font-bold text-[#2B2118]">
+            First-time indexing takes a while.
+          </p>
+
+          <p className="mt-4 text-sm leading-7 text-[#5B4636]">
+            Grab a coffee ☕ or take a short walk. Initial indexing may take up
+            to <span className="font-semibold text-[#2B2118]">20 minutes</span>,
+            depending on the repository size.
+          </p>
+
+          <p className="mt-4 text-sm leading-7 text-[#5B4636]">
+            In the meantime, you can explore one of our pre-indexed
+            repositories.
+          </p>
+
+          <p className="mt-4 text-sm leading-7 text-[#5B4636]">
+            Feel free to close this tab and come back later. Your indexing job
+            will continue in the background.
+          </p>
+        </div>
       </div>
     </div>
   );
